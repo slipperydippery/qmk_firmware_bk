@@ -12,9 +12,12 @@ enum planck_layers {
   _WIN_LOWER,
   _WIN_RAISE,
   _CAPSFN,
+  _SUBLIME,
+  _SUB_LOWER,
+  _SUB_RAISE,
+  _CAPSFP,
   _NUMPADFN,
   _USHIFT,
-  _ADJUST
 };
 
 enum planck_keycodes {
@@ -26,15 +29,19 @@ enum planck_keycodes {
   WIN_LOWER,
   WIN_RAISE,
   CAPSFN,
+  SUBLIME,
+  SUB_LOWER,
+  SUB_RAISE,
+  CAPSFP,
   NUMPADFN,
   USHIFT,
-  ADJUST,
   SIDEBAR,
   EXT_PLV,
   SPCSPC,
   DSHARR,
   EQUARR,
   OUTSPC,
+  SFTSFT,
   SCRN1,
   SCRN2,
 };
@@ -60,7 +67,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [13] = ACTION_MODS_KEY(MOD_LCTL, KC_RIGHT),
   [14] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_LEFT),
   [15] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_RIGHT),
-  [16] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_QUOT),
+  // [16] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_QUOT),
   [17] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_MINS),
   [18] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_SLSH),
   [19] = ACTION_MODS_TAP_KEY(NUMPADFN, KC_LEFT),
@@ -69,12 +76,12 @@ const uint16_t PROGMEM fn_actions[] = {
   [22] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_DOWN),
   [23] = ACTION_MODS_KEY(MOD_LGUI, KC_LBRC),
   [24] = ACTION_MODS_KEY(MOD_LGUI, KC_RBRC),
-  [25] = ACTION_MODS_KEY(MOD_LGUI, KC_LEFT),
-  [26] = ACTION_MODS_KEY(MOD_LGUI, KC_RIGHT),
+  // [25] = ACTION_MODS_KEY(MOD_LGUI, KC_LEFT),
+  // [26] = ACTION_MODS_KEY(MOD_LGUI, KC_RIGHT),
   [27] = ACTION_MODS_KEY(MOD_LSFT | MOD_LGUI, KC_LEFT),
   [28] = ACTION_MODS_KEY(MOD_LSFT | MOD_LGUI, KC_RIGHT),
   // [29] = ACTION_MODS_TAP_KEY(, KC_Q),
-  [30] = ACTION_MODS_TAP_KEY(MO(_USHIFT), DF(0)),
+  // [30] = ACTION_MODS_TAP_KEY(MO(_USHIFT), DF(0)),
   [31] = ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_4),
   [32] = ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_3),
   [33] = ACTION_MODS_KEY(MOD_LCTL | MOD_LSFT, KC_TAB),
@@ -91,16 +98,25 @@ const uint16_t PROGMEM fn_actions[] = {
   [44] = ACTION_MODS_KEY(MOD_LSFT, KC_PGDN),
   [45] = ACTION_MODS_KEY(MOD_LSFT | MOD_LCTL, KC_W),
   [46] = ACTION_MODS_KEY(MOD_LSFT | MOD_LALT, KC_W),
-  [47] = ACTION_MODS_KEY(MOD_LGUI, KC_ENT),
-  [48] = ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_ENT),
-  [50] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_MINS),
+  // [47] = ACTION_MODS_KEY(MOD_LGUI, KC_ENT),
+  // [48] = ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_ENT),
+  // [50] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_MINS),
   [51] = ACTION_MODS_KEY(MOD_LGUI, KC_LBRC),
   [52] = ACTION_MODS_KEY(MOD_LGUI, KC_RBRC),
   [53] = ACTION_MODS_KEY(MOD_LGUI, KC_ENT),
   [54] = ACTION_MODS_KEY(MOD_LGUI | MOD_LSFT, KC_ENT),
-  [55] = ACTION_MODS_KEY(MOD_LCTL, KC_1),
-  [56] = ACTION_MODS_KEY(MOD_LCTL, KC_2),
+  // [55] = ACTION_MODS_KEY(MOD_LCTL, KC_1),
+  // [56] = ACTION_MODS_KEY(MOD_LCTL, KC_2),
   [57] = ACTION_MODS_KEY(MOD_LSFT | MOD_LALT, KC_2),
+  [58] = ACTION_MODS_KEY(MOD_LSFT, KC_TAB),
+  [59] = ACTION_MODS_KEY(MOD_LALT | MOD_LSFT, KC_UP),
+  [60] = ACTION_MODS_KEY(MOD_LALT | MOD_LSFT, KC_DOWN),
+  [61] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_ENT),
+  [62] = ACTION_MODS_KEY(MOD_LCTL | MOD_LSFT, KC_A),
+  [63] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_DEL),
+  [64] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_D),
+  [65] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_F),
+  [66] = ACTION_MODS_KEY(MOD_LALT, KC_HOME),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -139,20 +155,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {LT(_CAPSFN, KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
   { F(17),  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  F(18),   F(1)},
-  {MO(_NUMPADFN), KC_LCTL, KC_LALT, KC_LGUI, MO(_WIN_LOWER),   KC_SPC,  KC_SPC,  MO(_WIN_RAISE),  KC_LEFT,   KC_UP,   KC_DOWN, LT(_USHIFT, KC_RIGHT)}
+  {MO(_NUMPADFN), KC_LCTL, KC_LALT, KC_LGUI, MO(_WIN_LOWER),   KC_SPC,  KC_SPC,  MO(_WIN_RAISE),  KC_LEFT,   KC_UP,   KC_DOWN, MO(_USHIFT)}
 },
 
 [_WIN_LOWER] = {
-  {KC_ESC,  KC_EXLM,   F(46), KC_HASH, KC_DLR,  KC_PERC,   F(38),   F(33),   F(10),   F(34),    F(39),  KC_DEL},
-  {_______, _______, _______, _______, _______, _______, _______,    F(8),   F(11),    F(9), _______, _______},
-  {KC_PIPE, _______, _______, _______,   F(40), _______, _______,   F(14),   F(35),   F(15), _______,   F(37)},
+  {LALT(KC_1), LALT(KC_F1), KC_AT, KC_HASH, KC_DLR,  KC_PERC,   F(38),   F(33),   F(10),   F(34),    SFTSFT,  F(63)},
+  {LALT(KC_TAB), F(62), _______,  F(64), F(65), _______, _______, LSFT(KC_TAB), F(11), KC_TAB, F(66), _______},
+  {KC_PIPE, _______, _______, _______,   F(40), _______, _______,   F(14),   F(35),   F(15), _______,   F(61)},
   {_______, _______, _______, _______, _______, OUTSPC, _______, _______, KC_LBRC,   F(41),   F(42), KC_RBRC}
 },
  
 [_WIN_RAISE] = {
-  { KC_GRV,  KC_EQL, KC_PLUS, KC_MINS, KC_UNDS, _______, _______,    F(6),    F(2),    F(7), F(43),  KC_DEL},
+  { KC_GRV,  KC_EQL, KC_PLUS, KC_MINS, KC_UNDS, LSFT(KC_F10), _______,    F(6),    F(2),    F(7), F(43),  KC_DEL},
   {KC_CAPS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, _______, _______,    F(3),    F(4),    F(5), F(44), _______},
-  { DSHARR, KC_LCBR, KC_RCBR, KC_BSLS,   F(40), _______, _______, _______, _______,   KC_UP, KC_BSLS,   F(36)},
+  { DSHARR, KC_LCBR, KC_RCBR, KC_BSLS,   F(40), _______, _______, _______, _______,   KC_UP, KC_BSLS,   F(37)},
   { EQUARR, _______, _______, _______, _______, SPCSPC, SPCSPC, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______}
 },
 
@@ -162,28 +178,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {_______,  KC_F11,  KC_F12, _______, _______, _______,  _______,  F(14), _______,  F(15), KC_BSLS, _______},
   {_______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC__MUTE}
 },
-// KC_MPLY, KC_MNXT
+
+[_SUBLIME] = {
+  {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+  {LT(_CAPSFP, KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
+  { F(17),  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  F(18),   F(1)},
+  {MO(_NUMPADFN), KC_LCTL, KC_LALT, KC_LGUI, MO(_SUB_LOWER),   KC_SPC,  KC_SPC,  MO(_SUB_RAISE),  KC_LEFT,   KC_UP,   KC_DOWN, MO(_USHIFT)}
+},
+
+[_SUB_LOWER] = {
+  {LCTL(KC_4), LCTL(KC_5), F(46), KC_HASH, KC_DLR,  KC_PERC,   F(38),   F(33),   F(10),   F(34),    F(39),  KC_DEL},
+  {_______, _______, _______, _______, _______, _______, _______,    F(8),   F(59),    F(9), _______, _______},
+  {KC_PIPE, _______, _______, _______,   F(40), _______, _______,   F(58),   F(60),   KC_TAB, _______,   F(37)},
+  {_______, _______, _______, _______, _______, OUTSPC, _______, _______, KC_LBRC,   F(41),   F(42), KC_RBRC}
+},
+ 
+[_SUB_RAISE] = {
+  { KC_GRV,  KC_EQL, KC_PLUS, KC_MINS, KC_UNDS, _______, _______,    F(6),    F(2),    F(7), F(43),  KC_DEL},
+  {KC_CAPS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, _______, _______,    F(3),    F(4),    F(5), F(44), _______},
+  { DSHARR, KC_LCBR, KC_RCBR, KC_BSLS,   F(40), _______, _______, _______, _______,   KC_UP, KC_BSLS,   F(36)},
+  { EQUARR, _______, _______, _______, _______, SPCSPC, SPCSPC, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______}
+},
+
+[_CAPSFP] = {
+  {_______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, KC_HOME,   KC_UP,  KC_END, KC_PGUP,  KC_INS},
+  {_______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_PSCR},
+  {_______,  KC_F11,  KC_F12, _______, _______, _______,  _______,  F(14), _______,  F(15), KC_BSLS, _______},
+  {_______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC__MUTE}
+},
 
 [_NUMPADFN] = {
-  {_______, _______, _______, _______, _______, _______, _______,   KC_7,    KC_8,    KC_9, KC_MINS, _______},
-  {_______, _______, _______, _______, _______, _______, _______,   KC_4,    KC_5,    KC_6, KC_PLUS, _______},
-  {_______, _______, _______, _______, _______, _______,   KC_0,    KC_1,    KC_2,    KC_3, KC_SLSH, _______},
-  {_______, _______, _______, _______, _______, _______, _______,   KC_0,    KC_0,  KC_DOT, KC_ASTR, _______}
+  {_______, _______, _______, _______, _______, _______, _______,   KC_7,    KC_8,    KC_9, KC_SLSH, _______},
+  {_______, _______, _______, _______, _______, _______, _______,   KC_4,    KC_5,    KC_6, KC_ASTR, _______},
+  {_______, _______, _______, _______, _______, _______,   KC_0,    KC_1,    KC_2,    KC_3, KC_MINS, _______},
+  {_______, _______, _______, _______, _______, _______, _______,   KC_0,    KC_0,  KC_DOT, KC_PLUS, _______}
 },
 
 [_USHIFT] = {
-  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN,  KC_DEL},
+  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN,  F(63)},
   {_______,   RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
-  { QWERTY, QWERTY_WIN, _______, _______, _______, LALT(KC_SPC), _______, _______, _______, _______, _______, _______}
+  { QWERTY, QWERTY_WIN, SUBLIME, _______, _______, LALT(KC_HOME), _______, _______, _______, _______, _______, _______}
 },
 
-[_ADJUST] = {
-  {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12},
-  {_______, RESET,   _______, AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, QWERTY,  _______, _______, _______,  _______},
-  {_______, MUV_DE,  MUV_IN,  MU_ON,   MU_OFF,  MI_ON,   MI_OFF,  _______, _______, _______, _______, _______},
-  {_______, _______, _______, _______, _______, _______, _______, _______,  QWERTY, QWERTY_WIN, _______, _______}
-}
 
 };
 
@@ -243,6 +280,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
           return false;
           break;
+        case SUBLIME:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_SUBLIME);
+          }
+          return false;
+          break;
+        case SUB_RAISE:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_SUB_RAISE);
+          }
+          return false;
+          break;
+        case SUB_LOWER:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_SUB_LOWER);
+          }
+          return false;
+          break;
+        case CAPSFP:
+          if (record->event.pressed) {
+            set_single_persistent_default_layer(_CAPSFP);
+          }
+          return false;
+          break;
         case NUMPADFN:
           if (record->event.pressed) {
             set_single_persistent_default_layer(_NUMPADFN);
@@ -252,12 +313,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case USHIFT:
           if (record->event.pressed) {
             set_single_persistent_default_layer(_USHIFT);
-          }
-          return false;
-          break;
-        case ADJUST:
-          if (record->event.pressed) {
-            set_single_persistent_default_layer(_ADJUST);
           }
           return false;
           break;
@@ -279,6 +334,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           case OUTSPC:
           if (record->event.pressed) {
             SEND_STRING(SS_LCTRL("b")" "SS_TAP(X_ESCAPE)SS_TAP(X_ESCAPE));
+          }
+          return false; break;
+          case SFTSFT:
+          if (record->event.pressed) {
+            SEND_STRING(SS_TAP(X_LSHIFT)SS_TAP(X_LSHIFT));
           }
           return false; break;
           case SCRN1:
