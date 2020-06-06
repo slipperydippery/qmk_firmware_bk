@@ -41,9 +41,9 @@ enum planck_keycodes {
   DSHARR,
   EQUARR,
   OUTSPC,
-  SFTSFT,
   SCRN1,
   SCRN2,
+  SFTSFT,
 };
 
 
@@ -67,7 +67,7 @@ const uint16_t PROGMEM fn_actions[] = {
   [13] = ACTION_MODS_KEY(MOD_LCTL, KC_RIGHT),
   [14] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_LEFT),
   [15] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_RIGHT),
-  // [16] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_QUOT),
+  [16] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_F2),
   [17] = ACTION_MODS_TAP_KEY(MOD_LSFT, KC_MINS),
   [18] = ACTION_MODS_TAP_KEY(MOD_LCTL, KC_SLSH),
   [19] = ACTION_MODS_TAP_KEY(NUMPADFN, KC_LEFT),
@@ -76,8 +76,8 @@ const uint16_t PROGMEM fn_actions[] = {
   [22] = ACTION_MODS_KEY(MOD_LCTL | MOD_LGUI, KC_DOWN),
   [23] = ACTION_MODS_KEY(MOD_LGUI, KC_LBRC),
   [24] = ACTION_MODS_KEY(MOD_LGUI, KC_RBRC),
-  // [25] = ACTION_MODS_KEY(MOD_LGUI, KC_LEFT),
-  // [26] = ACTION_MODS_KEY(MOD_LGUI, KC_RIGHT),
+  [25] = ACTION_MODS_KEY(MOD_LSFT, KC_F8),
+  [26] = ACTION_MODS_KEY(MOD_LALT | MOD_LSFT, KC_F7),
   [27] = ACTION_MODS_KEY(MOD_LSFT | MOD_LGUI, KC_LEFT),
   [28] = ACTION_MODS_KEY(MOD_LSFT | MOD_LGUI, KC_RIGHT),
   // [29] = ACTION_MODS_TAP_KEY(, KC_Q),
@@ -117,6 +117,8 @@ const uint16_t PROGMEM fn_actions[] = {
   [64] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_D),
   [65] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_F),
   [66] = ACTION_MODS_KEY(MOD_LALT, KC_HOME),
+  [67] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_LEFT),
+  [68] = ACTION_MODS_KEY(MOD_LCTL | MOD_LALT, KC_RIGHT),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -152,31 +154,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 },
 
 [_QWERTY_WIN] = {
-  {KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
-  {LT(_CAPSFN, KC_TAB),  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT},
-  { F(17),  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  F(18),   F(1)},
-  {MO(_NUMPADFN), KC_LCTL, KC_LALT, KC_LGUI, MO(_WIN_LOWER),   KC_SPC,  KC_SPC,  MO(_WIN_RAISE),  KC_LEFT,   KC_UP,   KC_DOWN, MO(_USHIFT)}
+  {             KC_ESC,    KC_Q,    KC_W,    KC_E,           KC_R,   KC_T,    KC_Y,            KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
+  {LT(_CAPSFN, KC_TAB),    KC_A,    KC_S,    KC_D,           KC_F,   KC_G,    KC_H,            KC_J,    KC_K,    KC_L, KC_SCLN,    KC_QUOT},
+  {              F(17),    KC_Z,    KC_X,    KC_C,           KC_V,   KC_B,    KC_N,            KC_M, KC_COMM,  KC_DOT,   F(18),       F(1)},
+  {      MO(_NUMPADFN), KC_LCTL, KC_LALT, KC_LGUI, MO(_WIN_LOWER), KC_SPC,  KC_SPC,  MO(_WIN_RAISE), KC_LEFT,   KC_UP, KC_DOWN, MO(_USHIFT)}
 },
 
 [_WIN_LOWER] = {
-  {LALT(KC_1), LALT(KC_F1), KC_AT, KC_HASH, KC_DLR,  KC_PERC,   F(38),   F(33),   F(10),   F(34),    SFTSFT,  F(63)},
-  {LALT(KC_TAB), F(62), _______,  F(64), F(65), _______, _______, LSFT(KC_TAB), F(11), KC_TAB, F(66), _______},
-  {KC_PIPE, _______, _______, _______,   F(40), _______, _______,   F(14),   F(35),   F(15), _______,   F(61)},
-  {_______, _______, _______, _______, _______, OUTSPC, _______, _______, KC_LBRC,   F(41),   F(42), KC_RBRC}
+  {  LALT(KC_1), LALT(KC_F1), _______,   F(64),   F(65), _______,   F(38),        F(33),   F(10),   F(34),  SFTSFT, _______},
+  {LALT(KC_TAB),       F(62),   F(25),  F(26),   KC_F8,   KC_F9, _______, LSFT(KC_TAB),   F(11),  KC_TAB,   F(66), _______},
+  {     KC_PIPE,     _______,   F(67),   F(16),   F(68), _______, _______,        F(14),   F(35),   F(15), _______,   F(61)},
+  {     _______,     _______,   F(67),   F(68), _______,  OUTSPC, _______,      _______, _______, _______, _______, _______}
 },
  
 [_WIN_RAISE] = {
-  { KC_GRV,  KC_EQL, KC_PLUS, KC_MINS, KC_UNDS, LSFT(KC_F10), _______,    F(6),    F(2),    F(7), F(43),  KC_DEL},
-  {KC_CAPS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, _______, _______,    F(3),    F(4),    F(5), F(44), _______},
-  { DSHARR, KC_LCBR, KC_RCBR, KC_BSLS,   F(40), _______, _______, _______, _______,   KC_UP, KC_BSLS,   F(37)},
-  { EQUARR, _______, _______, _______, _______, SPCSPC, SPCSPC, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______}
+  { KC_GRV,  KC_EQL, KC_PLUS, KC_MINS, _______, _______, _______,    F(6),    F(2),    F(7),   F(43),  KC_DEL},
+  {KC_CAPS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, _______, _______,    F(3),    F(4),    F(5),   F(44), _______},
+  { DSHARR, KC_LCBR, KC_RCBR, _______,   F(40), _______, _______, _______, _______,   KC_UP, KC_BSLS,   F(37)},
+  { EQUARR, _______, _______, _______, _______,  SPCSPC,  SPCSPC, _______, KC_LEFT, KC_DOWN, KC_RGHT, _______}
 },
 
 [_CAPSFN] = {
-  {_______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, KC_HOME,   KC_UP,  KC_END, KC_PGUP,  KC_INS},
-  {_______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_PSCR},
-  {_______,  KC_F11,  KC_F12, _______, _______, _______,  _______,  F(14), _______,  F(15), KC_BSLS, _______},
-  {_______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC__MUTE}
+  {LSFT(KC_ESC),   KC_F1,   KC_F2,   KC_F3,   KC_F4,               KC_F5, _______, KC_HOME,   KC_UP,  KC_END, KC_PGUP,  KC_INS},
+  {     _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,              KC_F10, _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, KC_PSCR},
+  {     _______,  KC_F11,  KC_F12, _______, _______,             _______, _______,   F(14), _______,   F(15), KC_BSLS, _______},
+  {     _______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, _______, KC_MPRV, KC_MNXT, KC_VOLD, KC_VOLU, KC__MUTE}
 },
 
 [_SUBLIME] = {

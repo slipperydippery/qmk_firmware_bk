@@ -239,7 +239,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,  KC_ASTR, KC_LPRN, KC_RPRN,  F(63)},
   {_______,   RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
-  { QWERTY, QWERTY_WIN, SUBLIME, _______, _______, LALT(KC_HOME), _______, _______, _______, _______, _______, _______}
+  { QWERTY, QWERTY_WIN, SUBLIME, STRCFTf, _______, LALT(KC_HOME), _______, _______, _______, _______, _______, _______}
 },
 
 };
